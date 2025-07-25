@@ -1,0 +1,32 @@
+"
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+    <body contenteditable="true" class="layout-fixed-complete sidebar-expand-lg bg-body-tertiary sidebar-open app-loaded">
+        <div class="modal fade show" id="findModal" tabindex="-1" style="display: block; padding-left: 0px;" aria-modal="true" role="dialog"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Find in this blog:</h5><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><form id="findAndReplaceForm"><div class="formgroup mb-2"><label for="find-text">Find:</label><input class="form-control form-control-sm" id="find-text" type="text" name="find-text" required=""></div></form></div><div class="modal-footer"><button class="btn btn-primary btn-sm" id="buttonFind" type="button">Find</button><button class="btn btn-secondary btn-sm" type="button" data-bs-dismiss="modal">Close</button></div></div></div></div>
+        <script>
+            $(window).on("load", function () {
+
+
+                if (typeof OpenModal === 'undefined') {
+                    OpenModal = function (modalName) {
+                        if (typeof jQuery === "function") {
+                            if ($('#' + modalName).length)
+                                $('#' + modalName).modal('show');
+                            else
+                                alert("Sorry, but there is no modal for " + modalName);
+                        } else {
+                            let mdw = new bootstrap.Modal(document.getElementById(modalName), {});
+                            mdw.show();
+                        }
+                    }
+                }
+
+
+            });
+        </script>
+    </body>
+
+</html>

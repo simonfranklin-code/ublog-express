@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Monaco Editor with jQuery AJAX</title>
+        <!-- Load jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Load Monaco Editor Loader Script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+    </head>
+
+    <body>
+
+        <div id="container" style="width:100%;height:600px;border:1px solid grey"></div>
+
+        <script>
+            require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' } });
+            require(['vs/editor/editor.main'], function () {
+                // Initialize the editor
+                var editor = monaco.editor.create(document.getElementById('container'), {
+                    language: "html",
+                    theme: "vs-dark",
+                    tabSize: 2,
+                    wordWrap: "off"
+                });
+
+                // Use jQuery's AJAX to fetch HTML content
+                $.ajax({
+                    url: '/users/htmlSections/digital-marketing-dreams/digital-marketing-guru/header-Digital-Marketing-Guru', // Replace with your HTML file path
+                    method: 'GET',
+                    success: function (data) {
+                        // Set the editor's value to the fetched HTML content
+                        editor.setValue(data);
+                    },
+                    error: function (error) {
+                        console.error('Error fetching the HTML file:', error);
+                    }
+                });
+            });
+        </script>
+
+
+    </body>
+</html>

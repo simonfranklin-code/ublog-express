@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Welcome to Blog CMS
+  if user &&  user.username
+    p You are logged in as #{user.role} 
+    p Logged in as #{user.username}
+  else
+    p Please login or register.
+
