@@ -3,7 +3,7 @@ const path = require('path');
 
 // Create a new service object
 const svc = new Service({
-    name: 'You-Blog Service',
+    name: 'ublog Service',
     script: path.join(__dirname, 'app.js')
 });
 

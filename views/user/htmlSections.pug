@@ -376,12 +376,12 @@ block content
                     const tbody = $('#htmlSectionsTableBody');
                     tbody.empty();
 
-                    //$('#blogPostIdFilter').empty();
-                    /*data.blogPosts.forEach(blogPost => {
+                    $('#blogPostIdFilter').empty();
+                    data.blogPosts.forEach(blogPost => {
                         let option = `<option value="${blogPost.BlogPostId}" name="${blogPost.Title}">${blogPost.Title}</option>`;
                         $('#blogPostIdFilter').append(option);
                     });
-                    $('#blogPostIdFilter').prop('selectedIndex', selectedBlogPostIndex); */
+                    $('#blogPostIdFilter').prop('selectedIndex', selectedBlogPostIndex);
                     
 
                     htmlSections = data.htmlSections;

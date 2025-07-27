@@ -3,8 +3,8 @@ const path = require('path');
 
 // Create a new service object
 const svc = new Service({
-    name: 'You-Blog Service',
-    description: 'You-Blog Windows Service.',
+    name: 'ublog Service',
+    description: 'ublog Windows Service.',
     script: path.join(__dirname, 'app.js'), // Path to your Node.js script
     // Optionally define the user credentials
     // user: {
