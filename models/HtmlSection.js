@@ -21,6 +21,7 @@ db.serialize(() => {
 	        "Page"	TEXT,
 	        "Header"	TEXT,
 	        "Body"	TEXT,
+	        "Component"	TEXT,
 	        PRIMARY KEY("HtmlSectionID" AUTOINCREMENT),
 	        CONSTRAINT "FK_HtmlSections_BlogPosts_BlogPostId" FOREIGN KEY("BlogPostId") REFERENCES "BlogPosts"("BlogPostId") ON DELETE CASCADE
         );

@@ -77,12 +77,12 @@ class DeepSeekApi {
     }
 
 
-    static getDeepseekChatHistory(session_id) {
+    static getDeepseekChatHistory(session_id, user_id) {
         try {
 
-            const query = `SELECT * FROM messages WHERE session_id = ? ORDER BY timestamp ASC`;
+            const query = `SELECT * FROM messages WHERE session_id = ? AND user_id = ? ORDER BY timestamp ASC`;
             return new Promise((resolve, reject) => {
-                deepseek_chat_db.all(query, [session_id], (err, messages) => {
+                deepseek_chat_db.all(query, [session_id, user_id], (err, messages) => {
                     if (err) return reject(err);
                     resolve(messages);
                 });

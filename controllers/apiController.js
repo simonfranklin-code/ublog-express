@@ -13,7 +13,7 @@ exports.createCompletion = async (req, res) => {
 exports.getDeepseekChatHistory = async (req, res) => {
     try {
         const { session_id } = req.body;
-        const messages = await DeepSeekApi.getDeepseekChatHistory(session_id);
+        const messages = await DeepSeekApi.getDeepseekChatHistory(session_id, req.user.id);
         res.json(messages);
     } catch (error) {
         console.error('Error:', error);

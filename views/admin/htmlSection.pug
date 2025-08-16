@@ -1,4 +1,5 @@
 extends htmlSectionPreviewLayout.pug
+include mixins/codeEditor.pug
 block baseDirectoryBlock
   != blog.BaseDirectory
 block titleBlock
@@ -45,13 +46,16 @@ block content
                     button#wysiwyg-tab.nav-link.active(data-bs-toggle='tab' data-bs-target='#wysiwyg-tab-pane' type='button' role='tab' aria-controls='wysiwyg-tab-pane' aria-selected='true') Wysiwyg
                 li.nav-item(role='presentation')
                     button#code-tab.nav-link(data-bs-toggle='tab' data-bs-target='#code-tab-pane' type='button' role='tab' aria-controls='code-tab-pane' aria-selected='false') Code
-
+                li.nav-item(role='presentation')
+                    button#mobirise-tab.nav-link(data-bs-toggle='tab' data-bs-target='#mobirise-tab-pane' type='button' role='tab' aria-controls='mobirise-tab-pane' aria-selected='false') Mobirise
             #editorTabContent.tab-content
                 #wysiwyg-tab-pane.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='home-tab' tabindex='0')
                     #editableHtmlContent( contenteditable="false")       
                         != htmlContent
                 #code-tab-pane.tab-pane.fade(role='tabpanel' aria-labelledby='profile-tab' tabindex='0')
                     iframe#viewHtmlSectionEditorFrame.viewHtmlSectionFrame(style='height: 100vh; width:100vw;' frameborder='0' scrolling='no')
+                #mobirise-tab-pane.tab-pane.fade(role='tabpanel' aria-labelledby='profile-tab' tabindex='0')
+                    +codeEditor(monacoHtml)
         .card-footer
             input#imageUploadInput(type='file' name='imageUploadInput' accept='image/*')
     .modal.fade#confirmDeleteModal(tabindex='-1' role='dialog')

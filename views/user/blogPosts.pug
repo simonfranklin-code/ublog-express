@@ -163,6 +163,9 @@ block content
               .form-group
                 label(for='blogPostPublisher') Publisher
                 textarea.form-control.form-control-sm#blogPostPublisher(name='publisher' rows='3')
+              .form-group
+                label(for='blogPostDraftPageName') Draft Page Name
+                input.form-control.form-control-sm#blogPostDraftPageName(type='text' name='draftPageName')
               .row.mt-2
                 .col-md-6
                   button.btn.btn-primary.btn-sm(type='submit') Save
@@ -348,6 +351,7 @@ block content
                 $('#blogPostMetaKeywords').val(blogPost.MetaKeywords);
                 $('#blogPostFooter').val(blogPost.Footer);
                 $('#blogPostPublisher').val(blogPost.Publisher);
+                $('#blogPostDraftPageName').val(blogPost.DraftPageName);
                 $('#blogPostId').val(blogPost.BlogPostId);
                 $('#blogPostModal').modal('show');
             });

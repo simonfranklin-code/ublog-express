@@ -9,7 +9,7 @@ block content
         // begin::Row
         .row
           .col-sm-6
-            h3.mb-0 DeepSeek Api Dashboard
+            h2.mb-0 DeepSeek Api Dashboard
           .col-sm-6
             ol.breadcrumb.float-sm-end
               li.breadcrumb-item
@@ -24,7 +24,7 @@ block content
     .row
       // Start col
       .col-md-12.connectedSortable
-        .body-wrapper(style='height: 100%;')
+        .body-wrapper(style='height: 85vh;')
           - const u = user ? { id: user.id, username: user.username, email: user.email, password: user.password, dateCreated: user.dateCreated, dateModified: user.dateModified, role: user.role, avatar: user.avatar } : {}
           +userCard(u)
     .row.g-4.mb-4

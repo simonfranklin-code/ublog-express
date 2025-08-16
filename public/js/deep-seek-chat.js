@@ -24,6 +24,7 @@ $(function () {
 
 
     async function sendMessage() {
+        let session_id = localStorage.getItem('sessionId');
         const message = $userInput.val().trim();
         if (!message) return;
 
@@ -32,7 +33,7 @@ $(function () {
         $sendBtn.prop('disabled', true);
 
         try {
-            showSpinner('deep-seek-chat-messages')
+            showSpinner('chat-card-body');
             //appendMessage('user', username, message, avatar, userId, socket.id, false);
             socket.emit('chatMessage', message); // Emit message to the server
             $userInput.val(''); // Clear the input field
@@ -42,11 +43,11 @@ $(function () {
                 url: '/api/deepseek/createCompletion',
                 method: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ message: message, session_id: sessionId })
+                data: JSON.stringify({ message: message, session_id: session_id })
             });
 
             socket.emit('chatMessage', response.data.answer); // Emit message to the server
-            hideSpinner('deep-seek-chat-messages');
+            hideSpinner('chat-card-body');
 
         } catch (error) {
             console.error('Error:', error);
@@ -60,7 +61,7 @@ $(function () {
     async function loadHistory() {
         try {
             const messages = await $.ajax({
-                url: '/api/deepseekChatHistory',
+                url: '/api/deepSeek/chatHistory',
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ session_id: sessionId })
@@ -95,12 +96,13 @@ $(function () {
         loadHistory();
         $('#current-session-name').text(`Current session: ${selectedText}`);
     }
+
     $('#chat-list').on('change', async function () {
         try {
             const selectedSessionId = $(this).val();
             if (!selectedSessionId) return;
             // Save session to sessionStorage
-            sessionStorage.setItem('activeSessionId', selectedSessionId);
+            sessionStorage.setItem('sessionId', selectedSessionId);
             await loadChatSession(selectedSessionId);
             continueChat();
         } catch (err) {
@@ -108,14 +110,15 @@ $(function () {
             showToast('Failed to load saved chat', true);
         }
     });
-    $('#reset-chat').on('click', async function () {
-        const sessionId = localStorage.getItem('sessionId');
+
+    $('#new-chat').on('click', async function () {
+        //const sessionId = localStorage.getItem('sessionId');
         const savedChatName = $('#saved-chat-select option:selected').text();
         const userId = window.USER?.id;
 
-        if (!sessionId || !savedChatName || savedChatName.includes('-- Select')) {
+        if (!savedChatName || savedChatName.includes('-- Select')) {
             // Proceed normally if nothing was saved
-            resetChatSession();
+            newChatSession();
             return;
         }
 
@@ -137,13 +140,13 @@ $(function () {
             showToast('Could not delete saved chat', true);
         }
 
-        resetChatSession();
+        newChatSession();
     });
 
-    function resetChatSession() {
+    function newChatSession() {
         const newSessionId = crypto.randomUUID();
         localStorage.setItem('sessionId', newSessionId);
-        sessionStorage.removeItem('activeSessionId');
+        //sessionStorage.removeItem('activeSessionId');
         $('#deep-seek-chat-messages').empty();
         $('#saved-chat-select').val('');
         $('#deep-seek-message-input').val('').focus();
@@ -152,17 +155,17 @@ $(function () {
     }
 
 
-    async function loadChatSession(sessionId) {
-        if (!sessionId) return;
+    async function loadChatSession(session_id) {
+        if (!session_id) return;
 
         $('#deep-seek-chat-messages').empty();
 
         try {
             const messages = await $.ajax({
-                url: '/api/deepseekChatHistory',
+                url: '/api/deepseek/chatHistory',
                 method: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ session_id: sessionId })
+                data: JSON.stringify({ session_id: session_id })
             });
 
             messages.forEach(msg => {
@@ -210,6 +213,7 @@ $(function () {
     });
 
     $('#saveChat').on('click', async function () {
+        const session_id = localStorage.getItem('sessionId');
         const name = $('#chatName').val().trim();
         if (!name.match(/^[\w\s-]+$/)) return alert('Invalid chat name. Use only letters, numbers, spaces, hyphens.');
 
@@ -217,7 +221,7 @@ $(function () {
             url: '/api/deepseek/saveChat',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ session_id: sessionId, name })
+            data: JSON.stringify({ session_id: session_id, name })
         });
         loadSavedChatsIntoSelect();
     });
@@ -538,7 +542,7 @@ $(function () {
         var msgTemplate = `
             <div class="direct-chat-msg ${cls}">
                 <div class="direct-chat-infos clearfix">
-                    <span class="direct-chat-name float-end">${username}&nbsp;<i class="far fa-file-video video_btn" data-socket-id="${socketId}"></i>&nbsp;<i class="bi bi-chat-text private_btn" data-privateId="${userId}"></i></span>
+                    <span class="direct-chat-name float-end">${username}&nbsp;<i class="far fa-file-video video_btn"></i>&nbsp;<i class="bi bi-chat-text private_btn" data-privateId="${userId}"></i></span>
                     <span class="direct-chat-timestamp float-start">${new Date().toISOString()}</span>
                 </div>
                 <!-- /.direct-chat-infos-->

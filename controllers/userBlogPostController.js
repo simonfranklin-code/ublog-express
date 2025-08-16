@@ -58,8 +58,8 @@ exports.createBlogPost = async (req, res) => {
 
 exports.editBlogPost = async (req, res) => {
     try {
-        const { title, slug, blogId, author, userId, content, metaDescription, metaKeywords, footer } = req.body;
-        await BlogPost.edit(req.params.id, title, slug, blogId, author, userId, content, metaDescription, metaKeywords, footer);
+        const { title, slug, blogId, author, userId, content, metaDescription, metaKeywords, footer, publisher, draftPageName } = req.body;
+        await BlogPost.edit(req.params.id, title, slug, blogId, author, userId, content, metaDescription, metaKeywords, footer, publisher, draftPageName);
         req.flash('success_msg', `Your Blog post "${title}" has been updated. by. ${req.user.username}`);
         // Emit flash message to connected clients
         const flashMessage = req.flash('success_msg');

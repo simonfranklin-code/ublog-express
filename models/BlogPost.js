@@ -17,6 +17,7 @@ db.serialize(() => {
 				"Footer"	TEXT,
 				"BeforeEndOfBodyScript"	TEXT,
 				"Publisher"	TEXT,
+				"DraftPageName"	TEXT,
 				PRIMARY KEY("BlogPostId" AUTOINCREMENT),
 				FOREIGN KEY("BlogId") REFERENCES "Blogs"("BlogId") ON DELETE CASCADE,
 				FOREIGN KEY("UserId") REFERENCES "users"("id") ON UPDATE CASCADE
@@ -25,22 +26,22 @@ db.serialize(() => {
 });
 
 class BlogPost {
-    static add(title, slug, blogId, author, userId, content) {
+	static add(title, slug, blogId, author, userId, content, draftPageName) {
         
         return new Promise((resolve, reject) => {
-            db.run(`INSERT INTO BlogPosts (Title, Content, BlogId, Author, UserId, Slug) VALUES (?, ?, ?, ?, ?, ?)`,
-                [title, content, blogId, author, userId, slug], function (err) {
+			db.run(`INSERT INTO BlogPosts (Title, Content, BlogId, Author, UserId, Slug, DraftPageName) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+				[title, content, blogId, author, userId, slug, draftPageName], function (err) {
                     if (err) return reject(err);
                     resolve(this.lastID);
                 });
         });
     }
 
-    static edit(blogPostId, title, slug, blogId, author, userId, content, metaDescription, metaKeywords, footer, publisher) {
+	static edit(blogPostId, title, slug, blogId, author, userId, content, metaDescription, metaKeywords, footer, publisher, draftPageName) {
         const updatedAt = new Date().toISOString();
         return new Promise((resolve, reject) => {
-			db.run(`UPDATE BlogPosts SET Title = ?, Slug = ?, UpdatedAt = ?, BlogId = ?, Author = ?, UserId = ?, Content = ?, MetaDescription = ?, MetaKeywords = ?, Footer = ?, Publisher = ? WHERE BlogPostId = ?`,
-				[title, slug, updatedAt, blogId, author, userId, content, metaDescription, metaKeywords, footer, publisher, blogPostId], function (err) {
+			db.run(`UPDATE BlogPosts SET Title = ?, Slug = ?, UpdatedAt = ?, BlogId = ?, Author = ?, UserId = ?, Content = ?, MetaDescription = ?, MetaKeywords = ?, Footer = ?, Publisher = ?, DraftPageName = ? WHERE BlogPostId = ?`,
+				[title, slug, updatedAt, blogId, author, userId, content, metaDescription, metaKeywords, footer, publisher, draftPageName, blogPostId], function (err) {
                     if (err) return reject(err);
                     resolve(this.changes);
                 });

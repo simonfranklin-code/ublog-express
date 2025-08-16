@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
 const userblogController = require('../controllers/userblogController');
 const userBlogPostController = require('../controllers/userBlogPostController');
 const userController = require('../controllers/userController');
 const userHtmlSectionController = require('../controllers/userHtmlSectionController');
 const adminController = require('../controllers/adminController');
 const permissionController = require('../controllers/permissionController');
+const hljs = require('highlight.js');
 const { ensureAuthenticated, ensureRole, ensureRoles, ensurePermission } = require('../middleware/permissionMiddleware');
 
 // Register
@@ -100,9 +102,26 @@ router.post('/htmlSections/findAndReplace', ensureAuthenticated, ensurePermissio
 // Route to retrieve blog Post Anchor
 router.get('/htmlSections/getIframeSrc/:blogSlug/:blogPostSlug/:anchor', ensureAuthenticated, ensurePermission('edit_htmlSections'), userHtmlSectionController.getIframeSrc);
 router.get('/htmlSections/:blogSlug/:slug/:anchor', ensureAuthenticated, ensurePermission('edit_htmlSections'), userHtmlSectionController.getBlogPostSectionByAnchor);
+function highlightCode(component) {
+    const html = component?._customHTML;
+    if (typeof html !== 'string') return 'No HTML';
+    return hljs.highlight(html, { language: 'xml' }).value;
+}
+
+function highlightCodeLess(component) {
+    const styles = component?._styles;
+    if (!styles) return 'No Styles';
+    const code = JSON.stringify(styles, null, 2);
+    return hljs.highlight(code, { language: 'less' }).value;
+}
+
 router.get('/mobirise', (req, res) => {
-    const data = JSON.parse(fs.readFileSync('./public/ublog/project.mobirise', 'utf-8'));
-    res.render('admin/mobirise', { title: 'You-Blog CMS', mobiriseData: data, hljs: hljs });
+    const data = JSON.parse(fs.readFileSync('./public/digital-marketing-dreams/project.mobirise', 'utf-8'));
+    res.render('user/mobirise', {
+        title: 'You-Blog CMS', mobiriseData: data, hljs: hljs,
+        highlightCode,
+        highlightCodeLess
+    });
 });
 
 

@@ -21,12 +21,12 @@ mixin userCard(u)
           button.btn.btn-tool(type='button' data-lte-toggle='card-maximize' style='z-index: 10000;')
             i.bi.bi-arrows-fullscreen(data-lte-icon='maximize' style='display: block;')
             i.bi.bi-fullscreen-exit(data-lte-icon='minimize' style='display: none;')
-      .card-body.chat-card-body
+      .card-body.chat-card-body#chat-card-body
         .input-group.input-group-sm.mb-1
           span.form-control.form-control-sm Saved Chats
           select#chat-list.form-control.form-control-sm
           .button-group.mb-3
-            button.btn.btn-primary.btn-sm#reset-chat(type='button') New Chat
+            button.btn.btn-primary.btn-sm#new-chat(type='button') New Chat
 
         .direct-chat-messages#deep-seek-chat-messages.chat-messages-area
         .direct-chat-contacts

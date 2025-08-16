@@ -300,7 +300,7 @@ exports.getBlogPostSectionByAnchor = async (req, res) => {
         });
 
 
-        res.render('admin/htmlSection', {
+        res.render('user/htmlSection', {
             htmlContent: htmlContent,
             title: blogPostTitle,
             blog: blogFromSlug,

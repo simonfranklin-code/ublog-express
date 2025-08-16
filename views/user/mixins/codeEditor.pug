@@ -1,0 +1,26 @@
+mixin codeEditor(monacoHtmlUrl, wrapTooltip='Toggle Wrap', themeTooltip='Toggle Theme', saveTooltip='Save', cancelTooltip='Cancel')
+  .row
+    .col-md-9
+        h4 Html
+    .col-md-3
+        h4 Css/Less
+  .row
+    .col-md-9
+      iframe#witsec-code-editor-iframe-html.witsec-code-editor-iframe(
+        src='/monaco/editor.html', scrolling='no'
+      )
+    .col-md-3
+      iframe#witsec-code-editor-iframe-css.witsec-code-editor-iframe(
+        src='/monaco/editor.html', scrolling='no'
+      )
+
+
+    script.
+      var curr = null;
+      var compIndex, ifrHTML, ifrCSS;
+      // Set editor columns to max height available
+      $(".witsec-code-editor-iframe").css("height", window.innerHeight - 40);	// 40 is the height of the header
+
+      // Set references for quick access
+      ifrHTML = document.getElementById("witsec-code-editor-iframe-html").contentWindow;
+      ifrCSS = document.getElementById("witsec-code-editor-iframe-css").contentWindow;

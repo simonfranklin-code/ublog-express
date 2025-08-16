@@ -41,6 +41,7 @@
     <Content Include="controllers\apiController.js" />
     <Content Include="controllers\blogController.js" />
     <Content Include="controllers\blogPostAdminController.js" />
+    <Content Include="controllers\editorController.js" />
     <Content Include="controllers\messageController.js" />
     <Content Include="controllers\userBlogPostController.js" />
     <Content Include="controllers\chatController.js" />
@@ -77,6 +78,7 @@
     <Content Include="models\HtmlSection.js" />
     <Content Include="models\Like.js" />
     <Content Include="models\Message.js" />
+    <Content Include="models\MobiriseProject.js" />
     <Content Include="models\Notification.js" />
     <Content Include="models\NotificationStats.js" />
     <Content Include="models\PasswordResetToken.js" />
@@ -1493,6 +1495,7 @@
     <Content Include="public\js\min\vs\language\typescript\tsWorker.js" />
     <Content Include="public\js\min\vs\loader.js" />
     <Content Include="public\js\monaco-editor.js" />
+    <Content Include="public\js\project_mobirise.js" />
     <Content Include="public\js\sb-admin-2.js" />
     <Content Include="public\js\sb-admin-2.min.js" />
     <Content Include="public\js\site.js" />
@@ -1504,6 +1507,20 @@
     <Content Include="public\mb-extensions\block.html" />
     <Content Include="public\mb-extensions\block.js" />
     <Content Include="public\mb-extensions\manifest.json" />
+    <Content Include="public\monaco\editor.html" />
+    <Content Include="public\monaco\min\vs\base\browser\ui\codicons\codicon\codicon.ttf" />
+    <Content Include="public\monaco\min\vs\base\worker\workerMain.js" />
+    <Content Include="public\monaco\min\vs\basic-languages\javascript\javascript.js" />
+    <Content Include="public\monaco\min\vs\basic-languages\less\less.js" />
+    <Content Include="public\monaco\min\vs\basic-languages\php\php.js" />
+    <Content Include="public\monaco\min\vs\editor\editor.main.css" />
+    <Content Include="public\monaco\min\vs\editor\editor.main.js" />
+    <Content Include="public\monaco\min\vs\editor\editor.main.nls.js" />
+    <Content Include="public\monaco\min\vs\language\css\cssMode.js" />
+    <Content Include="public\monaco\min\vs\language\css\cssWorker.js" />
+    <Content Include="public\monaco\min\vs\language\typescript\tsMode.js" />
+    <Content Include="public\monaco\min\vs\language\typescript\tsWorker.js" />
+    <Content Include="public\monaco\min\vs\loader.js" />
     <Content Include="public\temp\review-Becoming a Digital Marketing Guru.html">
       <SubType>Code</SubType>
     </Content>
@@ -3391,6 +3408,7 @@
     <Content Include="routes\blogRoutes.js" />
     <Content Include="routes\chatRoutes.js" />
     <Content Include="routes\commentRoutes.js" />
+    <Content Include="routes\editorRoutes.js" />
     <Content Include="routes\followerRoutes.js" />
     <Content Include="routes\friendRoutes.js" />
     <Content Include="routes\htmlSectionRoutes.js" />
@@ -3407,6 +3425,7 @@
     <Content Include="public\stylesheets\main.css" />
     <Content Include="README.md" />
     <Content Include="service.js" />
+    <Content Include="ublog-tcp-server.js" />
     <Content Include="uninstall-service.js" />
     <Content Include="utils\logger.js" />
     <Content Include="validation\validator.js" />
@@ -3435,6 +3454,7 @@
     <Content Include="views\layout.pug" />
     <Content Include="views\error.pug" />
     <Content Include="views\login.pug" />
+    <Content Include="views\user\mixins\codeEditor.pug" />
     <Content Include="views\password-reset-request.pug" />
     <Content Include="views\password-reset.pug" />
     <Content Include="views\user\activity-logs.pug" />
@@ -3445,11 +3465,15 @@
     <Content Include="views\user\dashboard.pug" />
     <Content Include="views\user\deepseekDashboard.pug" />
     <Content Include="views\user\direct-chat.pug" />
+    <Content Include="views\user\editProjectFile.pug" />
     <Content Include="views\user\followers.pug" />
     <Content Include="views\user\friends.pug" />
+    <Content Include="views\user\htmlSection.pug" />
     <Content Include="views\user\htmlSectionCodeEditor.pug" />
+    <Content Include="views\user\htmlSectionPreviewLayout.pug" />
     <Content Include="views\user\htmlSections.pug" />
     <Content Include="views\user\layout.pug" />
+    <Content Include="views\user\mobirise.pug" />
     <Content Include="views\user\notifications.pug" />
     <Content Include="views\user\permissions.pug" />
     <Content Include="views\user\profile.pug" />
@@ -3606,6 +3630,23 @@
     <Folder Include="public\js\min\vs\language\typescript\" />
     <Folder Include="public\mb-extensions\" />
     <Folder Include="public\digital-marketing-dreams\" />
+    <Folder Include="public\monaco\" />
+    <Folder Include="public\monaco\min\" />
+    <Folder Include="public\monaco\min\vs\" />
+    <Folder Include="public\monaco\min\vs\base\" />
+    <Folder Include="public\monaco\min\vs\base\browser\" />
+    <Folder Include="public\monaco\min\vs\base\browser\ui\" />
+    <Folder Include="public\monaco\min\vs\base\browser\ui\codicons\" />
+    <Folder Include="public\monaco\min\vs\base\browser\ui\codicons\codicon\" />
+    <Folder Include="public\monaco\min\vs\base\worker\" />
+    <Folder Include="public\monaco\min\vs\basic-languages\" />
+    <Folder Include="public\monaco\min\vs\basic-languages\javascript\" />
+    <Folder Include="public\monaco\min\vs\basic-languages\less\" />
+    <Folder Include="public\monaco\min\vs\basic-languages\php\" />
+    <Folder Include="public\monaco\min\vs\editor\" />
+    <Folder Include="public\monaco\min\vs\language\" />
+    <Folder Include="public\monaco\min\vs\language\css\" />
+    <Folder Include="public\monaco\min\vs\language\typescript\" />
     <Folder Include="public\ublog\" />
     <Folder Include="public\ublog\assets\" />
     <Folder Include="public\ublog\assets\animatecss\" />
@@ -3680,6 +3721,7 @@
     <Folder Include="routes\" />
     <Folder Include="views\" />
     <Folder Include="views\admin\" />
+    <Folder Include="views\user\mixins\" />
     <Folder Include="views\user\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

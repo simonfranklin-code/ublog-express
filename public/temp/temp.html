@@ -2,46 +2,53 @@
 <html lang="en">
 
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Monaco Editor with jQuery AJAX</title>
-        <!-- Load jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- Load Monaco Editor Loader Script -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monaco Editor with jQuery AJAX</title>
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Load Monaco Editor Loader Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+</head>
 
-    <body>
+<body>
+    <div id="witsec-code-editor">
 
-        <div id="container" style="width:100%;height:600px;border:1px solid grey"></div>
-
-        <script>
-            require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' } });
-            require(['vs/editor/editor.main'], function () {
-                // Initialize the editor
-                var editor = monaco.editor.create(document.getElementById('container'), {
-                    language: "html",
-                    theme: "vs-dark",
-                    tabSize: 2,
-                    wordWrap: "off"
-                });
-
-                // Use jQuery's AJAX to fetch HTML content
-                $.ajax({
-                    url: '/users/htmlSections/digital-marketing-dreams/digital-marketing-guru/header-Digital-Marketing-Guru', // Replace with your HTML file path
-                    method: 'GET',
-                    success: function (data) {
-                        // Set the editor's value to the fetched HTML content
-                        editor.setValue(data);
-                    },
-                    error: function (error) {
-                        console.error('Error fetching the HTML file:', error);
-                    }
-                });
-            });
-        </script>
+        <div class="witsec-code-editor-col-html">
 
 
-    </body>
+            <div class="witsec-code-editor-header"><h4>HTML</h4></div>',
+            <iframe id="witsec-code-editor-iframe-html" class="witsec-code-editor-iframe" src="' + monacoHtml + '" scrolling="no"></iframe>',
+
+        </div>
+        <div class="witsec-code-editor-divider"></div>
+        <div class="witsec-code-editor-col-css">
+            <div class="witsec-code-editor-header">
+                <h4 style="float:left; width:50%">CSS/LESS</h4>
+                <h4 style="float:left; width:50%; text-align:right">
+
+                    <i class="mbr-icon-align-left witsec-code-editor-wrapbutton" data-tooltipster="bottom" title="Toggle Wrap" style="cursor:pointer"></i>&nbsp;&nbsp;&nbsp;
+                    <i class="mbr-icon-sun        witsec-code-editor-themebutton" data-tooltipster="bottom" title="Toggle Theme" style="cursor:pointer"></i>
+
+                </h4>
+
+            </div>
+            <iframe id="witsec-code-editor-iframe-css" class="witsec-code-editor-iframe" src="' + monacoHtml + '" scrolling="no"></iframe>',
+
+        </div>
+        <button class="witsec-code-editor-save btn btn-fab btn-raised btn-primary" data-tooltipster="top" title="Save">
+
+            <svg height="30" viewBox="0 0 30 30" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M.5 14a.5.5 0 0 0-.348.858l9.988 9.988a.5.5 0 1 0 .706-.706L.858 14.152A.5.5 0 0 0 .498 14zm28.99-9c-.13.004-.254.057-.345.15L12.163 22.13c-.49.47.236 1.197.707.707l16.982-16.98c.324-.318.077-.857-.363-.857z" /></svg>',
+
+        </button>
+        <button class="witsec-code-editor-cancel btn btn-fab btn-raised btn-material-red" data-tooltipster="top" title="Cancel">
+
+            <svg height="30" viewBox="0 0 30 30" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M29.484 0c-.13.004-.252.057-.343.15L17.164 12.13c-.49.47.235 1.197.706.707L29.846.857c.325-.318.1-.857-.363-.857zM12.488 17c-.13.004-.25.058-.34.15L.162 29.14c-.486.467.233 1.186.7.7L12.848 17.85c.325-.313.093-.85-.36-.85zM.5 0a.5.5 0 0 0-.348.86L29.14 29.845a.5.5 0 1 0 .706-.706L.86.152A.5.5 0 0 0 .5 0z" /></svg>',
+
+        </button>
+    </div>
+
+
+</body>
 </html>

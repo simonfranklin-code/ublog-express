@@ -6,7 +6,7 @@ const { ensureAuthenticated, ensureRole, ensureRoles, ensurePermission } = requi
 
 router.get('/deepseekDashboard', ensureAuthenticated, ensureRoles('admin'), apiController.deepseekDashboard);
 router.post('/deepseek/createCompletion', ensureAuthenticated, ensureRoles(['admin']), apiController.createCompletion);
-router.post('/deepseekChatHistory', ensureAuthenticated, ensureRoles(['admin']), apiController.getDeepseekChatHistory);
+router.post('/deepseek/chatHistory', ensureAuthenticated, ensureRoles(['admin']), apiController.getDeepseekChatHistory);
 router.post('/deepseek/clearChatHistory', ensureAuthenticated, ensureRoles(['admin']), clearChatLimiter, apiController.clearDeepseekChatHistory);
 router.post('/deepseek/saveChat', ensureAuthenticated, ensureRoles(['admin']), clearChatLimiter, apiController.saveChat);
 router.get('/deepseek/listSavedChats', ensureAuthenticated, ensureRoles(['admin']), clearChatLimiter, apiController.listSavedChats);
